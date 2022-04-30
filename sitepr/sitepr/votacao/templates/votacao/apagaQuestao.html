@@ -1,0 +1,38 @@
+
+
+{% extends "votacao/index.html" %}
+
+{% block questao %}
+        <h1>Apagar a Questao</h1>
+ {% endblock %}
+
+{% block referencia_questao %}
+{% endblock %}
+
+{% block Novaquestao %}
+{% endblock %}
+
+{% block NovoUtilizador %}
+{% endblock %}
+
+{% block questaoList %}
+{% endblock %}
+
+{% block informacaoPessoal %}
+    {% if error_message %}
+     <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form name="nova_questao" action="{% url 'votacao:apagaQuestao' %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}
+
+{% block form %}
+
+{% endblock %}
+
+
+

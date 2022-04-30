@@ -1,0 +1,76 @@
+{% extends "votacao/index.html" %}
+
+{% block questao %}
+ {% if user.is_superuser == 1 %}
+    <h2>Olá admin!</h2>
+
+{% elif user.is_superuser == 0 %}
+    <h2>Olá {{user.username}} !</h2>
+{% endif %}
+
+<h1 style="text-align: center">{{ questao.questao_texto }}</h1>
+ {% endblock %}
+
+{% block referencia_questao %}
+{% endblock %}
+
+{% block Novaquestao %}
+{% endblock %}
+
+{% block NovoUtilizador %}
+{% endblock %}
+
+{% block questaoList %}
+{% endblock %}
+
+{% block informacaoPessoal %}
+
+  {% if error_message %}
+     <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form method="POST">
+
+   <!--csrf - Serve para controlo de segurança-->
+    {% csrf_token %}
+    {% for opcao in questao.opcao_set.all %}
+        <input type="radio" name="opcao" id="opcao{{ forloop.counter }}" value="{{ opcao.id }}" />
+        <label for="opcao{{ forloop.counter }}">
+            {{ opcao.opcao_texto }}
+        </label>
+        <br />
+    {% endfor %}
+    <br/>
+    <input type="submit" value="Voto" formaction="{% url 'votacao:voto' questao.id %}"/>
+    <br/>
+    <br/>
+    <input type="submit" value="Nova Opcao" formaction="{% url 'votacao:nova_opcao' questao.id %}">
+    <br/>
+    <br/>
+
+<!--mudei faz botoes-->
+
+    <input type="submit" value="apagaQuestao" formaction="{% url 'votacao:apagaQuestao' questao.id %}">
+    <br/>
+    <br/>
+    <input type="submit" value="Apaga Opcão" formaction="{% url 'votacao:apagaOpcao' questao.id %}">
+    <br/>
+    <br/>
+</form>
+
+{% endblock %}
+
+{% block form %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

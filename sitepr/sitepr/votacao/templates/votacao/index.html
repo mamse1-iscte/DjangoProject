@@ -1,0 +1,79 @@
+
+
+
+
+   <body>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'votacao/style.css' %}" />
+
+
+
+
+ <div class="logo">
+<img src="{% static "votacao/images/iscteLogo.png" %}" width="280"
+     height="82">
+
+
+ </div>
+{% block questao %}
+    <h1 >Não está logado</h1>
+
+
+<p >Precisas de estar logado para aceder ás questões.</p>
+{% endblock %}
+
+{% block questaoList %}
+      {% if latest_question_list %}
+      <ul>
+         {% for questao in latest_question_list %}
+         <li>
+         {% block referencia_questao %}
+            <a href="">{{ questao.questao_texto }}
+         {% endblock %}
+            </a>
+         </li>
+         {% endfor %}
+      </ul>
+      {% else %}
+      <p>Nao ha questoes disponiveis.</p>
+      {% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{% block Novaquestao %}
+   <a href="">Nova Questao</a>
+    -Só pode criar uma questão se estiver logado como administrador
+    <br>
+{% endblock %}
+
+<br>
+<br>
+
+{% block informacaoPessoal %}
+{% endblock %}
+
+{% block form %}
+<form action="{% url 'votacao:loginview' %}" method="POST">
+    {% csrf_token %}
+    <h1>Login</h1>
+  <label for="fname">Username:</label>
+  <input type="text" id="fname" name="fname" ><br>
+  <label for="lname">Password:</label>
+  <input type="password" id="pwd" name="pwd"><br><br>
+  <input type="submit" value="Login">
+</form>
+{% endblock%}
+
+{% block NovoUtilizador %}
+    <a href="{% url 'votacao:criarUser' %}">Registar Novo Utilizador</a>
+{% endblock %}
+
+
+   </body>

@@ -1,0 +1,42 @@
+
+
+{% extends "votacao/index.html" %}
+
+{% block questao %}
+   <h1>{{ questao.questao_texto }}</h1>
+ {% endblock %}
+
+{% block referencia_questao %}
+{% endblock %}
+
+{% block Novaquestao %}
+{% endblock %}
+
+{% block NovoUtilizador %}
+{% endblock %}
+
+{% block questaoList %}
+{% endblock %}
+
+{% block informacaoPessoal %}
+   <ul>
+{% for opcao in questao.opcao_set.all %}
+ <li>{{ opcao.opcao_texto }} --
+ {{ opcao.votos }}
+voto{{ opcao.votos|pluralize }}</li>
+{% endfor %}
+</ul>
+<a href="{% url 'votacao:detalhe' questao.id %}">Votar novamente?</a>
+
+{% endblock %}
+
+{% block form %}
+
+{% endblock %}
+
+
+
+
+
+
+

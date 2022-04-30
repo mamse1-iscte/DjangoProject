@@ -1,0 +1,41 @@
+
+{% extends "votacao/index.html" %}
+
+{% block questao %}
+   <h1>{{ questao.questao_texto }}</h1>
+ {% endblock %}
+
+{% block referencia_questao %}
+{% endblock %}
+
+{% block Novaquestao %}
+{% endblock %}
+
+{% block NovoUtilizador %}
+{% endblock %}
+
+{% block questaoList %}
+{% endblock %}
+
+{% block informacaoPessoal %}
+
+   {% if error_message %}
+     <p><strong>{{ error_message }}</strong></p>
+{% endif %}
+
+<form action="{% url 'votacao:nova_opcao' questao.id %}" method="POST">
+    {% csrf_token %}
+    Introduza uma nova opção:  <input type="text" name="opcao_proposta">
+    <input type="submit" value="Submit">
+</form>
+
+
+{% endblock %}
+
+{% block form %}
+
+{% endblock %}
+
+
+
+
