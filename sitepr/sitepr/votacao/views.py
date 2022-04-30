@@ -115,8 +115,8 @@ def loginview(request):
  password = request.POST['pwd']
  user = authenticate(username=username,
  password=password)
- login(request, user)
  if user is not None:
+    login(request, user)
     if user.is_staff==1:
         return HttpResponseRedirect(reverse('votacao:paginaAdmin'))
     print("sucesso")
